@@ -1,0 +1,17 @@
+{% extends 'base.html'%} {% block title %} {{user.username}} {% endblock %} {%
+block content %} {{user.first_name}} {{user.last_name}} {{user.email}}
+
+<ul>
+  <h4>Feedback:</h4>
+  {% for feedback in user.feedback %}
+  <li>
+    {{ feedback.title }}
+  </li>
+  {% endfor %}
+</ul>
+<a href="/users/{{session_username}}/feedback/add">Add Feedback</a>
+{% if session_username == user.username %}
+<form action="/users/{{session_username}}/delete" method="POST">
+  <button type="submit">Delete User</button>
+</form>
+{% endif %} {% endblock %}
